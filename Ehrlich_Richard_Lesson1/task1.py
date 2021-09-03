@@ -1,46 +1,27 @@
-user_sec = int(input('Введите колличество секунд: '))
-
-#  не уверен что использование словаря в данном случае актуально, но лучше на данный момент не придумал
-unit = {
-    'minute': 60,
-    'hour': 3600,
-    'day': 86400
-}
+unit = (
+    ('day', 86400),
+    ('hour', 3600),
+    ('minute', 60),
+    ('second', 1)
+)
 
 
-#  Можно сделать return в одну строку, но будет совсем не читаемо. Конечно, если не использвать импорты.
-def get_time_distance(seconds):
-    day = seconds // unit['day']
-    hour = (seconds % unit['day']) // unit['hour']
-    minutes = ((seconds % unit['day']) % unit['hour']) // unit['minute']
-    sec = ((seconds % unit['day']) % unit['hour']) % unit['minute']
-    if not day:
-        if not hour:
-            if not minutes:
-                return f"{sec} сек"
-            return f"{minutes} мин {sec} сек"
-        return f"{hour} час {minutes} мин {sec} сек"
-    return f"{day} дн {hour} час {minutes} мин {sec} сек"
+def get_time_distance(unit_list, seconds):
+    time_dict = {}
+    for unit_name, sec in unit_list:
+        units = seconds // sec
+        time_dict[unit_name] = units
+        if units:
+            seconds -= units * sec
+        else:
+            continue
+    result = ("{} д ".format(time_dict['day']) if time_dict['day'] else '') + \
+          ("{} час ".format(time_dict['hour']) if time_dict['hour'] else '') + \
+          ("{} мин ".format(time_dict['minute']) if time_dict['minute'] else '') + \
+          ("{} сек ".format(time_dict['second']) if time_dict['second'] else '')
+    return result
 
 
 if __name__ == '__main__':
-    print(get_time_distance(user_sec))
-
-# Если без функции - то вот мастхэв мануал =)
-# if seconds < unit['minute']:
-#     print(f'{seconds} сек')
-# elif unit['minute'] < seconds < unit['hour']:
-#     minutes = seconds // unit['minute']
-#     sec = seconds % unit['minute']
-#     print(f"{minutes} мин {sec} сек")
-# elif unit['hour'] < seconds < unit['day']:
-#     hour = seconds // unit['hour']
-#     minutes = (seconds % unit['hour']) // unit['minute']
-#     sec = (seconds % unit['hour']) % unit['minute']
-#     print(f'{hour} час {minutes} мин {sec} сек')
-# else:
-#     day = seconds // unit['day']
-#     hour = (seconds % unit['day']) // unit['hour']
-#     minutes = ((seconds % unit['day']) % unit['hour']) // unit['minute']
-#     sec = ((seconds % unit['day']) % unit['hour']) % unit['minute']
-#     print(f"{day} дн {hour} час {minutes} мин {sec} сек")
+    user_sec = int(input('Введите колличество секунд: '))
+    print(get_time_distance(unit, user_sec))
