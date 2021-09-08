@@ -9,3 +9,4 @@ def thesaurus(*args):
 
 
 print(thesaurus("Петр", "Иван", "Мария", "Илья"))
+
