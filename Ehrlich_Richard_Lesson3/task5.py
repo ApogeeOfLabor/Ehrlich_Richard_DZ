@@ -10,11 +10,13 @@ def get_jokes(lot, *args, flag=False):
     for n in range(lot):
         joke = list(map(random.choice, args))
         if flag and len(list_jokes) > 0:
+            print('GO**')
             for phrase in list_jokes:
                 for word in joke:
-                    if word not in phrase and phrase == list_jokes[-1]:
-                        list_jokes.append(joke)
-                        # пока не работает
+                    if word not in phrase:
+                        break
+                    list_jokes.append(joke)
+                    # пока не работает
         else:
             list_jokes.append(joke)
     return list_jokes
