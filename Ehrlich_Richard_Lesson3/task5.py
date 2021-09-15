@@ -1,9 +1,3 @@
-import random
-nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
-adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
-adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
-
-
 def get_jokes(lot, *args, flag=False):
     list_jokes = []
     while lot:
@@ -28,6 +22,10 @@ def get_jokes(lot, *args, flag=False):
 
 
 if __name__ == '__main__':
+    import random
+    nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+    adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+    adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
     try:
         print(*get_jokes(5, nouns, adverbs, adjectives, flag=True), sep='\n')
         # Уникальность выдачи регулируется присутствием именованного аргумента flag
