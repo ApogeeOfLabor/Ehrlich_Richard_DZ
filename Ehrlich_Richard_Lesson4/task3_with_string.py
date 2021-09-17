@@ -1,7 +1,7 @@
-def currency_rates(url, valute_code):
+def currency_rates(valute_code):
     valute_dict = {}
-    response = requests.get(url).text.split('</Valute>')
-    current_date = requests.get(url).headers['Date']
+    response = requests.get('http://www.cbr.ru/scripts/XML_daily.asp').text.split('</Valute>')
+    current_date = requests.get('http://www.cbr.ru/scripts/XML_daily.asp').headers['Date']
     for index, value in enumerate(response):
         response[index] = value.strip('<, >').split('><')
     for _, item in enumerate(response):
@@ -19,5 +19,4 @@ def currency_rates(url, valute_code):
 
 if __name__ == '__main__':
     import requests
-    url = 'http://www.cbr.ru/scripts/XML_daily.asp'
-    print(currency_rates(url, 'usd'))
+    print(currency_rates('usd'))

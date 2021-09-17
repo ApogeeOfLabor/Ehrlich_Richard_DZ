@@ -1,6 +1,6 @@
-def currency_rates(url, name_valute):
-    dom_data_valute = ET.fromstring(requests.get(url).text)
-    current_date = requests.get(url).headers['Date']
+def currency_rates(name_valute):
+    dom_data_valute = ET.fromstring(requests.get('http://www.cbr.ru/scripts/XML_daily.asp').text)
+    current_date = requests.get('http://www.cbr.ru/scripts/XML_daily.asp').headers['Date']
     for country in dom_data_valute.findall('Valute'):
         code_valute = country.find('CharCode').text
         value_valute = country.find('Value').text
@@ -12,6 +12,4 @@ if __name__ == '__main__':
     import requests
     import xml.etree.ElementTree as ET
 
-    url = 'http://www.cbr.ru/scripts/XML_daily.asp'
-
-    print(currency_rates(url, 'eur'), sep='\n')
+    print(currency_rates('eur'), sep='\n')
