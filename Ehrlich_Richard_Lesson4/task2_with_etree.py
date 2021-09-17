@@ -19,3 +19,6 @@ if __name__ == '__main__':
     url = 'http://www.cbr.ru/scripts/XML_daily.asp'
 
     print(currency_rates(url, 'eur'), sep='\n')
+
+
+
