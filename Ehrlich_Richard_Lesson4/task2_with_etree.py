@@ -4,9 +4,9 @@ def currency_rates(url, name_valute):
 
     dom_data_valute = ET.fromstring(data)
 
-    for country in dom_data_valute.findall('Valute'):
-        char_valute = country.find('CharCode').text
-        value_valute = country.find('Value').text
+    for inner_item in dom_data_valute.findall('Valute'):
+        char_valute = inner_item.find('CharCode').text
+        value_valute = inner_item.find('Value').text
 
         if char_valute.lower() == name_valute.lower():
             return '.'.join(value_valute.split(','))
