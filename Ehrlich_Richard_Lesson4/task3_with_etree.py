@@ -1,7 +1,7 @@
 def currency_rates(name_valute):
-    dom_data_valute = ET.fromstring(requests.get('http://www.cbr.ru/scripts/XML_daily.asp').text)
-    current_date = requests.get('http://www.cbr.ru/scripts/XML_daily.asp').headers['Date']
-    date_obj = dateparser.parse(' '.join(current_date.split()[1:4]))
+    response = requests.get('http://www.cbr.ru/scripts/XML_daily.asp')
+    dom_data_valute = ET.fromstring(response.text)
+    date_obj = dateparser.parse(' '.join(response.headers['Date'].split()[1:4]))
     end_ = str(date_obj).split()[0]
     for inner_item in dom_data_valute.findall('Valute'):
         code_valute = inner_item.find('CharCode').text

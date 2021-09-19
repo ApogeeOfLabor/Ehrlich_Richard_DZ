@@ -1,12 +1,12 @@
 def currency_rates(valute_code):
     valute_dict = {}
-    response = requests.get('http://www.cbr.ru/scripts/XML_daily.asp').text.split('</Valute>')
-    current_date = requests.get('http://www.cbr.ru/scripts/XML_daily.asp').headers['Date']
-    date_obj = dateparser.parse(' '.join(current_date.split()[1:4]))
+    response = requests.get('http://www.cbr.ru/scripts/XML_daily.asp')
+    get_blocks = response.text.split('</Valute>')
+    date_obj = dateparser.parse(' '.join(response.headers['Date'].split()[1:4]))
     end_ = str(date_obj).split()[0]
-    for idx, value in enumerate(response):
-        response[idx] = value.strip('<, >').split('><')
-    for _, item in enumerate(response):
+    for idx, value in enumerate(get_blocks):
+        get_blocks[idx] = value.strip('<, >').split('><')
+    for _, item in enumerate(get_blocks):
         for _, symbol in enumerate(item):
             if symbol.startswith('CharCode'):
                 dict_key = symbol[symbol.find('>') + 1: symbol.find('<')]
