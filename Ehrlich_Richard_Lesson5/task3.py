@@ -1,10 +1,5 @@
 def get_tuple_range():
-    if len(tutors) <= len(klasses):
-        yield from zip(tutors, klasses)
-    else:
-        # Понятно что костыль, но по другому прям что-то никак не мог придумать
-        [klasses.append(None) for _ in range(len(tutors) - len(klasses))]
-        yield from zip(tutors, klasses)
+    yield from zip(tutors, (klasses[index] if index < len(klasses) else None for index in range(len(tutors))))
 
 
 if __name__ == '__main__':
