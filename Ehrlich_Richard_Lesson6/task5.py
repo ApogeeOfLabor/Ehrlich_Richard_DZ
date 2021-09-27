@@ -5,16 +5,16 @@ def makes_files(path, filename, text=None):
     if not os.path.isfile(filepath):
         with open(filepath, 'w') as file:
             if not text:
-                text = str(input(f'Введите входные данные для файла {filepath}\nчерез запятую или введите None, если ввод данных не требуется: '))
-                file.writelines(text.split(','))
+                text = str(input(f'Введите входные данные для файла {filename}\nчерез запятую или введите None, если ввод данных не требуется: '))
+                [file.writelines(item + '\n') for item in text.split(',')]
             elif text:
                 file.write(str(text))
             return True
     else:
         with open(filepath, 'a') as file:
             if not text:
-                text = str(input(f'Вводите входные данные для файла {filepath}\nчерез запятую или введите None, если ввод данных не требуется: '))
-                file.writelines(text.split(','))
+                text = str(input(f'Вводите данные файла {filename} для дозаписи, через запятую\nИли введите None, если ввод данных не требуется: '))
+                [file.writelines(item + '\n') for item in text.split(',')]
             elif text:
                 file.write(text)
             return True
