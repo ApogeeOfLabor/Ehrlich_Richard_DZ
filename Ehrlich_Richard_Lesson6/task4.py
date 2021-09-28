@@ -17,7 +17,9 @@ def make_file(users_file, hobbies_file):
         if user_information and user_hobbies:
             with open('users_hobby_for_task4.txt', 'a', encoding='utf-8') as f:
                 f.writelines(f'{user_information}: {user_hobbies}\n')
-                print(f'{user_information}: {user_hobbies}')
+                # Вывод в консоль:
+                # Иванов Иван Иванович: скалолазание, охота
+                # Петров Петр Петрович: горные лыжи
 
 
 if __name__ == '__main__':
