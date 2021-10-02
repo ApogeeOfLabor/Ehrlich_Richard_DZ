@@ -28,13 +28,13 @@ if __name__ == '__main__':
     # Timer нашёл в сети. Как он работает пока не понимаю.
 
     print(*get_next_big_num(src), 'size: ->', getsizeof(get_next_big_num(src)), 'timer: ->',
-          Timer("get_next_big_num(src)", 'from __main__ import get_next_big_num').timeit(0),
+          Timer("get_next_big_num(src)", globals=globals()).timeit(),
           type(get_next_big_num(src)))
     # 12 44 4 10 78 123 size: -> 120 timer: от  -> 2.000000000002e-06  до   -> 4.199999999995874e-06
     # <class 'list'>
 
     print(*get_next_big_num_new(src), 'size: ->', getsizeof(get_next_big_num_new(src)), 'timer: ->',
-          Timer("get_next_big_num_new(src)", 'from __main__ import get_next_big_num_new').timeit(0),
+          Timer("get_next_big_num(src)", globals=globals()).timeit(),
           type(get_next_big_num_new(src)))
     # 12 44 4 10 78 123 size: -> 112  timer: от  -> 2.2000000000008124e-06  до   -> 4.4999999999975615e-06
     # <class 'generator'>
@@ -43,6 +43,10 @@ if __name__ == '__main__':
     one_line_result = (src[index + 1] for index in range(len(src) - 1) if src[index + 1] > src[index])
 
     print(*one_line_result, 'size: ->', getsizeof(one_line_result), 'timer: ->',
-          Timer("one_line_result", 'from __main__ import one_line_result').timeit(0), type(one_line_result))
+          Timer("get_next_big_num(src)", globals=globals()).timeit(), type(one_line_result))
     # 12 44 4 10 78 123 size: -> 112   timer: от  -> 2.3999999999996247e-06  до   -> 4.200000000002813e-06
     # <class 'generator'>
+# После твоего совета в комментариях на GITHUB поменял код таймера и ДА) разниза очевидно заметна:)
+# 12 44 4 10 78 123 size: -> 120 timer: -> 2.5153080300005968 <class 'list'>
+# 12 44 4 10 78 123 size: -> 112 timer: -> 1.9824268449992815 <class 'generator'>
+# 12 44 4 10 78 123 size: -> 112 timer: -> 1.9674390750005841 <class 'generator'>
