@@ -1,3 +1,8 @@
+import sys
+import csv
+# почему-то без этих импортов именно тут, код не работает как модуль для импортирования
+
+
 def get_reader():
     with open('bakery.csv', 'r+', encoding='utf-8') as file:
         reader = csv.DictReader(file)
@@ -22,7 +27,11 @@ def show_sale(argv):
                 print(row['value'])
 
 
+def show_all_positions():
+    for row in get_reader():
+        if row['number'].isdigit():
+            print(row['number'], row['value'])
+
+
 if __name__ == '__main__':
-    import sys
-    import csv
     exit(show_sale(sys.argv))
