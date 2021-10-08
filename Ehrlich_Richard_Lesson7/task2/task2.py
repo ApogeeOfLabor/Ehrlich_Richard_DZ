@@ -1,3 +1,7 @@
+import os
+import yaml
+
+
 def make_from_list(entered_root, items_list):
     for item in items_list:
         if isinstance(item, dict):
@@ -31,11 +35,8 @@ def make_from_string(entered_root, entered_string):
             os.makedirs(os.path.join(entered_root, entered_string), exist_ok=False)
 
 
-if __name__ == '__main__':
-    import os
-    import yaml
-
-    with open('config.yaml', 'r') as file:
+def main(config_file):
+    with open(config_file, 'r') as file:
         reader = yaml.safe_load(file)
         root = os.curdir
         if isinstance(reader, dict):
@@ -44,3 +45,7 @@ if __name__ == '__main__':
             make_from_list(root, reader)
         elif isinstance(reader, str):
             make_from_string(root, reader)
+
+
+if __name__ == '__main__':
+    main('config.yaml')
