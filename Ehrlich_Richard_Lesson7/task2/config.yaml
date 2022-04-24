@@ -1,0 +1,23 @@
+---
+'my_project':
+- 'settings':
+  - task1.py
+  - dev.py
+  - prod.py
+- 'mainapp':
+  - task1.py
+  - models.py
+  - views.py
+  - 'templates':
+    - 'mainapp':
+      - base.html
+      - index.html
+- 'authapp':
+  - task1.py
+  - models.py
+  - views.py
+  - 'templates':
+    - 'authapp':
+      - base.html
+      - index.html
+...
