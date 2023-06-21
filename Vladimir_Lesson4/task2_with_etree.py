@@ -1,8 +1,6 @@
 def currency_rates(url, name_valute):
-    response = requests.get(url)
-    data = response.text
-
-    dom_data_valute = ET.fromstring(data)
+    response = requests.get(url).text
+    dom_data_valute = ET.fromstring(response)
 
     for inner_item in dom_data_valute.findall('Valute'):
         char_valute = inner_item.find('CharCode').text
