@@ -1,4 +1,7 @@
 class Cell:
+
+    """ Работа с БИО клетками: сложение, деление, уножение и т.д. """
+
     __counter = 0
 
     def __init__(self, inner_cells):

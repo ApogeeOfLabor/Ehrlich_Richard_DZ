@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Clothes(ABC):
+    """ Фабрика по производству костюмов и пальто"""
     __instance = None
     __x = []
 

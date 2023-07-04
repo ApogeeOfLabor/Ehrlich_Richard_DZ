@@ -1,7 +1,10 @@
-import numpy as np
+# import numpy as np
 
 
 class Matrix:
+
+    """ Работа с матрицами """
+
     def __init__(self, seq):
         self.matrix = seq
 
@@ -16,14 +19,13 @@ class Matrix:
         if set([len(item) for item in self.matrix]) != set([len(item) for item in other]):
             raise ValueError("Матрицы должны быть одной длинны")
 
-        self.matrix = np.array(self.matrix) + np.array(other)
-        return self
-
-        # Самописный способ: сложение по индексам
-        # for ind_l in range(len(self.matrix)):
-        #     for ind_n in range(len(self.matrix[ind_l])):
-        #         self.matrix[ind_l][ind_n] += other[ind_l][ind_n]
+        # self.matrix = np.array(self.matrix) + np.array(other)
         # return self
+
+        for ind_l in range(len(self.matrix)):
+            for ind_n in range(len(self.matrix[ind_l])):
+                self.matrix[ind_l][ind_n] += other[ind_l][ind_n]
+        return self
 
 
 if __name__ == '__main__':
